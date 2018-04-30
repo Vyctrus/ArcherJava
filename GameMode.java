@@ -18,7 +18,7 @@ public abstract class GameMode {
         Text endMessageTab[]=new Text[2];
 	Font myFont;
 	Text hpTexts[]=new Text[3];//HP 1 i 2 gracza + wartosci waitru w formie tekstu
-	StringBuilder wordOfWind;//tekst ktory przekazujemy tablicy do wyswietlenia
+	StringBuilder wordOfWind=new StringBuilder();//tekst ktory przekazujemy tablicy do wyswietlenia
 	Wind myWind;
 	SoundandMusic mySounds;
 	View view1;
@@ -26,7 +26,7 @@ public abstract class GameMode {
 	Player player2;
 	Clock myClock;
 	Time myTime;
-	ArrayList<Player> players;
+	ArrayList<Player> players=new ArrayList<Player>();
 	Arrow liveArrow;
 	ArrayList<DeadArrow> deadarrows;
 	int sequence = 0;
@@ -36,7 +36,10 @@ public abstract class GameMode {
 	boolean letShoot = true;
         Text endMessage;
         Text endButton;
-        //Event event()=new Event();
+
+    protected GameMode() throws IOException {
+    }
+    //Event event()=new Event();
         
         
        /*@Override

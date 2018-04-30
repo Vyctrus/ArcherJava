@@ -25,10 +25,12 @@ public class Options extends Menu {
         {
             selectedItemIndex = 0;
             dificultyLevelIndex = 1;
+            myFont=new Font();
             myFont.loadFromFile(Paths.get("snap.ttf"));
             
             for (int i = 0; i < NUMBER_OF_OPTIONS_ITEMS; i++)
             {
+                    optionsTexts[i]=new Text();
                     optionsTexts[i].setFont(myFont);
                     optionsTexts[i].setPosition(new Vector2f(myWindow.getSize().x*(float)0.2, myWindow.getSize().y / (NUMBER_OF_OPTIONS_ITEMS + 1)*(i + 1)));
                     optionsTexts[i].setCharacterSize(50);

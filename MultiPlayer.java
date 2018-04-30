@@ -46,13 +46,13 @@ public class MultiPlayer extends GameMode {
 	hpTexts[0].setCharacterSize(30);
 	
 	hpTexts[0].setColor(Color.WHITE);
-	hpTexts[0].setString((player1.getplayerHP()));
+	hpTexts[0].setString(Integer.toString(player1.getplayerHP()));
 
 	hpTexts[1].setFont(myFont);
 	hpTexts[1].setPosition(player2.getPosition().x, player2.getPosition().y - 200);
 	hpTexts[1].setCharacterSize(30);
 	hpTexts[1].setColor(Color.WHITE);
-	hpTexts[1].setString((player2.getplayerHP()));
+	hpTexts[1].setString(Integer.toString(player2.getplayerHP()));
 
 	hpTexts[2].setFont(myFont);
 	hpTexts[2].setPosition(windPosition.x,windPosition.y);
@@ -128,7 +128,7 @@ public class MultiPlayer extends GameMode {
 				}
 				mySounds.painUpdate();
 				hpTexts[0].setColor(Color.RED);
-				hpTexts[0].setString((player1.getplayerHP()));
+				hpTexts[0].setString(Integer.toString(player1.getplayerHP()));
 			}
 			if (sequence==1 && liveArrow.isInterecting(player2)) {
 				player2.decreaseHP(); 
@@ -138,7 +138,7 @@ public class MultiPlayer extends GameMode {
 				}
 				mySounds.painUpdate();
 				hpTexts[1].setColor(Color.RED);
-				hpTexts[1].setString((player2.getplayerHP()));
+				hpTexts[1].setString(Integer.toString(player2.getplayerHP()));
 			}
 			liveArrow.update(myWindow, view1, myClock,myWind);
 

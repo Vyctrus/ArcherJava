@@ -68,9 +68,10 @@ public class Wind extends BasicTransformable implements Drawable{
                     }
                     v2iwind=new Vector2i(windX,windY);
                     ///////////////////////////////////////
-                    
+                    windtexture=new Texture();
                     windtexture.loadFromFile(Paths.get("Arrow.png"));
                     windtexture.setSmooth(true);
+                    windsprite=new Sprite();
                     windsprite.setTexture(windtexture);
                     windsprite.setPosition(new Vector2f(position.x, position.y ));
                     if (v2iwind.y == 0) {

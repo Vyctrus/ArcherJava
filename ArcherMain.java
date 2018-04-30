@@ -22,9 +22,18 @@ public class ArcherMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException{
+
+		try{
+			String current = new java.io.File( "." ).getCanonicalPath();
+			System.out.println("Current dir:"+current);
+			String currentDir = System.getProperty("user.dir");
+			System.out.println("Current dir using System:" +currentDir);
+		}catch(IOException e){}
+
+
+
         RenderWindow window= new RenderWindow(getDesktopMode(),"Archers 1.0");
 	window.setFramerateLimit(60);
-	GameMode ptrGameMode;//referencja? do zmieniania trybu gry
 	//Background background(window);
         Background background=new Background(window);
         MainMenu myMenu=new MainMenu(window);
@@ -32,10 +41,11 @@ public class ArcherMain {
 	Menu ptrPresent;//dwa wskazniki ktore sluza do przenoszenia sie miedzy menu gry a opcjami zaczynamy od menu gry wiec ptrPresent = myMenu
         ptrPresent = myMenu;
 	Menu ptrAlternative = myOptions;
-	DataOfOptions doo;
-	Camera myCamera;
+	DataOfOptions doo=new DataOfOptions();
+	Camera myCamera=new Camera();
+		GameMode ptrGameMode=new SinglePlayer(window,doo,myCamera);//referencja? do zmieniania trybu gry
 
-	while (window.isOpen())
+		while (window.isOpen())
 	{
 		/////////////////////////////////////////////////////////Event Handling
 		Event event;

@@ -30,8 +30,10 @@ public class Player extends BasicTransformable implements Drawable {
         
 	public Player(float xp, float yp)throws IOException
         {
+            myPlayerTexture=new Texture();
             myPlayerTexture.loadFromFile(Paths.get("Player.png"));
             myPlayerTexture.setSmooth(true);
+            myPlayerSprite=new Sprite();
             myPlayerSprite.setTexture(myPlayerTexture);
             myPlayerSprite.setOrigin(myPlayerTexture.getSize().x / 2, myPlayerTexture.getSize().y / 2);
             myPlayerSprite.setScale(1.0f, 1.0f);

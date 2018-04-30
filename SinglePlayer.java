@@ -22,9 +22,11 @@ public class SinglePlayer extends GameMode {
         
         SinglePlayer(RenderWindow myWindow, DataOfOptions doo, Camera myCamera)throws IOException
         {
+            endMessageTab[0]=new Text();
+            endMessageTab[1]=new Text();
             endMessageTab[0].setString("Wygrales !!!");
             endMessageTab[1].setString("Przegrales");
-            liveArrow.setisDead(true);
+           // liveArrow.setisDead(true);
             player1 = new Player(45, myWindow.getSize().y - 300);
             player2 = new Player(myWindow.getSize().x - 45, myWindow.getSize().y - 300);
             player2.playerFlip();
@@ -40,18 +42,24 @@ public class SinglePlayer extends GameMode {
             view1.setCenter(players.get(sequence).getPosition());
             myWindow.setView(view1);
 
+            myFont=new Font();
             myFont.loadFromFile(Paths.get("snap.ttf"));
+
+            hpTexts[0]=new Text();
+            hpTexts[1]=new Text();
+            hpTexts[2]=new Text();
+
             hpTexts[0].setFont(myFont);
             hpTexts[0].setPosition(player1.getPosition().x, player1.getPosition().y - 200);///140
             hpTexts[0].setCharacterSize(30);
             hpTexts[0].setColor(Color.WHITE);
-            hpTexts[0].setString((player1.getplayerHP()));
+            hpTexts[0].setString(Integer.toString(player1.getplayerHP()));
 
             hpTexts[1].setFont(myFont);
             hpTexts[1].setPosition(player2.getPosition().x, player2.getPosition().y - 200);
             hpTexts[1].setCharacterSize(30);
             hpTexts[1].setColor(Color.WHITE);
-            hpTexts[1].setString((player2.getplayerHP()));
+            hpTexts[1].setString(Integer.toString(player2.getplayerHP()));
 
             hpTexts[2].setFont(myFont);
             hpTexts[2].setPosition(windPosition.x, windPosition.y);
@@ -139,7 +147,7 @@ public class SinglePlayer extends GameMode {
                                     myBot.setgoodAim(true);
                                     mySounds.painUpdate();
                                     hpTexts[0].setColor(Color.RED);
-                                    hpTexts[0].setString((player1.getplayerHP()));
+                                    hpTexts[0].setString(Integer.toString(player1.getplayerHP()));
                             }
                             if (sequence == 1 && liveArrow.isInterecting(player2)) {
                                     player2.decreaseHP();
@@ -149,7 +157,7 @@ public class SinglePlayer extends GameMode {
                                     }
                                     mySounds.painUpdate();
                                     hpTexts[1].setColor(Color.RED);
-                                    hpTexts[1].setString((player2.getplayerHP()));
+                                    hpTexts[1].setString(Integer.toString(player2.getplayerHP()));
                             }
                             liveArrow.update(myWindow, view1, myClock, myWind);
 
