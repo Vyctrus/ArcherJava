@@ -20,11 +20,13 @@ public class ArcherMain {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException{
+
+		
         RenderWindow window= new RenderWindow(getDesktopMode(),"Archers 1.0");
 	window.setFramerateLimit(60);
-	GameMode ptrGameMode;//referencja? do zmieniania trybu gry
 	//Background background(window);
         Background background=new Background(window);
         MainMenu myMenu=new MainMenu(window);
@@ -32,18 +34,20 @@ public class ArcherMain {
 	Menu ptrPresent;//dwa wskazniki ktore sluza do przenoszenia sie miedzy menu gry a opcjami zaczynamy od menu gry wiec ptrPresent = myMenu
         ptrPresent = myMenu;
 	Menu ptrAlternative = myOptions;
-	DataOfOptions doo;
-	Camera myCamera;
-
-	while (window.isOpen())
+	DataOfOptions doo=new DataOfOptions();
+	Camera myCamera=new Camera();
+		GameMode ptrGameMode=new SinglePlayer(window,doo,myCamera);//referencja? do zmieniania trybu gry
+        Event event;
+		while (window.isOpen())
 	{
 		/////////////////////////////////////////////////////////Event Handling
-		Event event;
+		//Event event;
                 event = window.pollEvent();
 		while (event!=null)
 		{//zmiany w Menu.h MainMenu cpp i h Options cpp i h
 			ptrPresent.Listening(event, window, ptrPresent, ptrAlternative,ptrGameMode, doo, myCamera);//funkcja juz nic nie zwraca bo przyjmuje referencje do wskaznikow, jezli chce sie przejsc do innego menu to wskanziki zamieniaja sie wartosciami
-		}
+		event=null;
+                }
 		//////////////////////////////////////////////////////////////Update
 
 

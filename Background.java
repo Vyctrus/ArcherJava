@@ -25,9 +25,15 @@ public class Background {
     //Background() = default;
     Background(RenderWindow myWindow) throws IOException
     {
+    	mySprite=new Sprite();
+    	tabSprite=new ArrayList();//<Sprite>
+        //ArrayList<Sprite> tabSprite;
 	spriteTabIterator = 0;
+	forestTexture=new Texture();
 	forestTexture.loadFromFile(Paths.get("forest.jpg"));
+	skyTexture=new Texture();
 	skyTexture.loadFromFile(Paths.get("sky.jpg"));
+	grassTexture=new Texture();
 	grassTexture.loadFromFile(Paths.get("grass.jpg"));
 
 	for (int i = 0; i < 13; i++, spriteTabIterator++)
@@ -74,7 +80,7 @@ public class Background {
     }
     void displayBackground(RenderWindow myWindow)
     {
-	for (int i = 0; i < 52; i++)
+	for (int i = 0; i < 52; i++)//52
 	{
 		myWindow.draw(tabSprite.get(i));
 	}
