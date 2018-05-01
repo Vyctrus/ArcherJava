@@ -28,13 +28,13 @@ public class Background {
     	mySprite=new Sprite();
     	tabSprite=new ArrayList();//<Sprite>
         //ArrayList<Sprite> tabSprite;
-	spriteTabIterator = 0;
-	forestTexture=new Texture();
-	forestTexture.loadFromFile(Paths.get("forest.jpg"));
-	skyTexture=new Texture();
-	skyTexture.loadFromFile(Paths.get("sky.jpg"));
-	grassTexture=new Texture();
-	grassTexture.loadFromFile(Paths.get("grass.jpg"));
+		spriteTabIterator = 0;
+		forestTexture=new Texture();
+		forestTexture.loadFromFile(Paths.get("forest.jpg"));
+		skyTexture=new Texture();
+		skyTexture.loadFromFile(Paths.get("sky.jpg"));
+		grassTexture=new Texture();
+		grassTexture.loadFromFile(Paths.get("grass.jpg"));
 
 		for (int i = 0; i < 13; i++, spriteTabIterator++)
 		{
@@ -64,26 +64,28 @@ public class Background {
     //~Background() = default;
     void displayGraphics(RenderWindow myWindow, ArrayList<Player> players, Arrow liveArrow, ArrayList<DeadArrow> deadarrows)
     {
-	for (int i = 0; i < 52; i++) {
-		myWindow.draw(tabSprite.get(i));
-	}
-	for (int i = 0; i<players.size(); i++)
-	{
-		myWindow.draw(players.get(i));
-	}
-	if (!liveArrow.getisDead()) {
-		myWindow.draw(liveArrow);
-	}
-	for (int i = 0; i < deadarrows.size(); i++) {
-		myWindow.draw(deadarrows.get(i));
-	}
+		for (int i = 0; i < 52; i++) {
+			myWindow.draw(tabSprite.get(i));
+		}
+		for (int i = 0; i<players.size(); i++)
+		{
+			myWindow.draw(players.get(i));
+		}
+		if(liveArrow!=null){
+			if (!liveArrow.getisDead()) {
+				myWindow.draw(liveArrow);
+			}
+		}
+
+		for (int i = 0; i < deadarrows.size(); i++) {
+			myWindow.draw(deadarrows.get(i));
+		}
     }
     void displayBackground(RenderWindow myWindow)
     {
-	for (int i = 0; i < 52; i++)//52
-	{
-		myWindow.draw(tabSprite.get(i));
-	}
+		for (int i = 0; i < 52; i++)//52
+		{
+			myWindow.draw(tabSprite.get(i));
+		}
     }
-
 }

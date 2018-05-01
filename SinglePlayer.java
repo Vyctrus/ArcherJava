@@ -75,8 +75,7 @@ public class SinglePlayer extends GameMode {
         }
             @Override
 	public void Run(RenderWindow myWindow, DataOfOptions doo, Camera myCamera)
-        { boolean problemzlivearrow=false;
-            try{
+            { try{
             mySounds.musicPlay();
             Background myBackground=new Background(myWindow);
             Event event;
@@ -100,7 +99,6 @@ public class SinglePlayer extends GameMode {
                                             aimLineChecker = false;
                                             if (sequence == 0 && letShoot == true) {
                                                     liveArrow =new Arrow(aimLineBegin, aimLineEnd, player1.getPosition(), myWindow, myClock);
-                                                problemzlivearrow=true;
                                                     sequence = 1;
                                                     letShoot = false;
                                                     mySounds.setfirstTime(true);
@@ -138,14 +136,13 @@ public class SinglePlayer extends GameMode {
                                     myBot.aim();
                                     aimLineEnd = myBot.getshoot();
                                     liveArrow = new Arrow(aimLineBegin, aimLineEnd, player2.getPosition(), myWindow, myClock);
-                                problemzlivearrow=true;
                                     sequence = 0;
                                     letShoot = false;
                                     mySounds.setfirstTime(true);
                             }
                     }
                     //////////////////////////////////////////////////////////////////////Window update
-                if(problemzlivearrow){
+                if(liveArrow!=null){
                     if (!liveArrow.getisDead()) {
                             if (sequence == 0 && liveArrow.isInterecting(player1)) {
                                     player1.decreaseHP();

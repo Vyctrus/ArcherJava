@@ -24,10 +24,10 @@ public abstract class GameMode {
 	View view1;
 	Player player1;
 	Player player2;
-	Clock myClock;
+	Clock myClock=new Clock();
 	Time myTime;
 	ArrayList<Player> players;
-	Arrow liveArrow;
+	Arrow liveArrow=null;
 	ArrayList<DeadArrow> deadarrows;
 	int sequence = 0;
 	boolean aimLineChecker = false;

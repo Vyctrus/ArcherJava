@@ -20,7 +20,7 @@ import org.jsfml.system.Vector2i;
 public class Wind extends BasicTransformable implements Drawable{
         Random myRand;
         Vector2i v2iwind;
-	Clock windClock;
+	Clock windClock=new Clock();
 	Time windTime1;
 	Time oldTime;
 	boolean myuseWind = true;

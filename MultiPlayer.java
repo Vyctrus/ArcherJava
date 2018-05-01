@@ -20,17 +20,19 @@ import org.jsfml.window.event.Event;
 public class MultiPlayer extends GameMode {
     public MultiPlayer (RenderWindow myWindow,DataOfOptions doo,Camera myCamera)throws IOException
     {
+		endMessageTab[0]=new Text();
+		endMessageTab[1]=new Text();
 	endMessageTab[0].setString("Wygral gracz pierwszy");
 	endMessageTab[1].setString("Wygral gracz drugi");
 
 	myTime = myClock.getElapsedTime();
-	liveArrow.setisDead(true);
+//	liveArrow.setisDead(true);
 	player1 = new Player(45, myWindow.getSize().y - 300);
 	player2 = new Player(myWindow.getSize().x - 45, myWindow.getSize().y - 300);
 	player2.playerFlip();
-	//windPosition.x = player1.getPosition().x+150;
-        windPosition=new Vector2f(player1.getPosition().x+150,player1.getPosition().y - 150);
-	//windPosition.y = player1.getPosition().y - 150;
+	windPosition=new Vector2f(player1.getPosition().x+150,player1.getPosition().y - 150);
+	players=new ArrayList();//#uwaga
+		 deadarrows=new ArrayList();//#uwaga
 	players.add(player1);
 	players.add(player2);
 	myWind=new Wind(windPosition, doo);
@@ -39,8 +41,13 @@ public class MultiPlayer extends GameMode {
 	view1.setCenter(players.get(sequence).getPosition());
 	myWindow.setView(view1);
 
-	
+	myFont=new Font();
 	myFont.loadFromFile(Paths.get("snap.ttf"));
+
+	hpTexts[0]=new Text();
+	hpTexts[1]=new Text();
+	hpTexts[2]=new Text();
+
 	hpTexts[0].setFont(myFont);
 	hpTexts[0].setPosition(player1.getPosition().x,player1.getPosition().y-200);
 	hpTexts[0].setCharacterSize(30);
@@ -121,44 +128,44 @@ public class MultiPlayer extends GameMode {
                         event=null;
 		}
 		//////////////////////////////////////////////////////////////////////Window update
-		if (!liveArrow.getisDead()) {
-			//std::cout << "update" << std::endl;
-			if (sequence==0 && liveArrow.isInterecting(player1)) {
-				player1.decreaseHP();
-				if (player1.getplayerHP() < 1) {
-					gameOver(myWindow, myBackground, false);
-					return;
+		if(liveArrow!=null) {
+			if (!liveArrow.getisDead()) {
+				//std::cout << "update" << std::endl;
+				if (sequence == 0 && liveArrow.isInterecting(player1)) {
+					player1.decreaseHP();
+					if (player1.getplayerHP() < 1) {
+						gameOver(myWindow, myBackground, false);
+						return;
+					}
+					mySounds.painUpdate();
+					hpTexts[0].setColor(Color.RED);
+					hpTexts[0].setString(Integer.toString(player1.getplayerHP()));
 				}
-				mySounds.painUpdate();
-				hpTexts[0].setColor(Color.RED);
-				hpTexts[0].setString(Integer.toString(player1.getplayerHP()));
-			}
-			if (sequence==1 && liveArrow.isInterecting(player2)) {
-				player2.decreaseHP(); 
-				if (player2.getplayerHP() < 1) {
-					gameOver(myWindow, myBackground, true);
-					return;
+				if (sequence == 1 && liveArrow.isInterecting(player2)) {
+					player2.decreaseHP();
+					if (player2.getplayerHP() < 1) {
+						gameOver(myWindow, myBackground, true);
+						return;
+					}
+					mySounds.painUpdate();
+					hpTexts[1].setColor(Color.RED);
+					hpTexts[1].setString(Integer.toString(player2.getplayerHP()));
 				}
-				mySounds.painUpdate();
-				hpTexts[1].setColor(Color.RED);
-				hpTexts[1].setString(Integer.toString(player2.getplayerHP()));
-			}
-			liveArrow.update(myWindow, view1, myClock,myWind);
+				liveArrow.update(myWindow, view1, myClock, myWind);
 
-			mySounds.flyingUpdate(myClock);
+				mySounds.flyingUpdate(myClock);
 
-			if (liveArrow.getisHit())
-			{
-				if (!liveArrow.getisDead()) {
-					deadarrows.add(new DeadArrow(liveArrow));
-					liveArrow.setisDead(true);
-					letShoot = true;
-					mySounds.hitUpdate();
+				if (liveArrow.getisHit()) {
+					if (!liveArrow.getisDead()) {
+						deadarrows.add(new DeadArrow(liveArrow));
+						liveArrow.setisDead(true);
+						letShoot = true;
+						mySounds.hitUpdate();
+					}
+					myCamera.start();
 				}
-				myCamera.start();
 			}
 		}
-
 		Vector2i pixelPos = Mouse.getPosition(myWindow);
 		Vector2f worldPos = myWindow.mapPixelToCoords(pixelPos);
 		aimLineEnd = new Vector2i(worldPos);
