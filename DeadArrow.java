@@ -15,8 +15,8 @@ import java.io.IOException;
  */
 public class DeadArrow extends BasicTransformable implements Drawable{
     
-    Texture myxtexture;
-    Sprite myxsprite;
+    Texture myxtexture=new Texture();
+    Sprite myxsprite=new Sprite();
      @Override
     public void draw(RenderTarget target, RenderStates state) {
         target.draw(myxsprite);

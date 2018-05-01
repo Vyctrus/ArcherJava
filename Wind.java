@@ -35,8 +35,8 @@ public class Wind extends BasicTransformable implements Drawable{
 	int moveXplus = 1;
 	int moveYplus = 1;
 
-	Texture windtexture;
-	Sprite windsprite;
+	Texture windtexture=new Texture();
+	Sprite windsprite=new Sprite();
         @Override
 	public void draw(RenderTarget target, RenderStates state){
             if (myuseWind) { target.draw(this.windsprite, state); }
