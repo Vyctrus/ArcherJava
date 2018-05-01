@@ -52,21 +52,22 @@ public class SinglePlayer extends GameMode {
             hpTexts[2]=new Text();
 
             hpTexts[0].setFont(myFont);
-            hpTexts[0].setPosition(player1.getPosition().x, player1.getPosition().y - 200);///140
+            hpTexts[0].setPosition(player1.getPosition().x, player1.getPosition().y - 250);///140
             hpTexts[0].setCharacterSize(30);
             hpTexts[0].setColor(Color.WHITE);
             hpTexts[0].setString(Integer.toString(player1.getplayerHP()));
 
             hpTexts[1].setFont(myFont);
-            hpTexts[1].setPosition(player2.getPosition().x, player2.getPosition().y - 200);
+            hpTexts[1].setPosition(player2.getPosition().x, player2.getPosition().y - 250);
             hpTexts[1].setCharacterSize(30);
             hpTexts[1].setColor(Color.WHITE);
             hpTexts[1].setString(Integer.toString(player2.getplayerHP()));
 
             hpTexts[2].setFont(myFont);
-            hpTexts[2].setPosition(windPosition.x, windPosition.y);
+            hpTexts[2].setPosition(windPosition.x, windPosition.y-250);
             hpTexts[2].setCharacterSize(30);
             hpTexts[2].setColor(Color.WHITE);
+            wordOfWind=new StringBuilder();
             wordOfWind.append("X= ");
             wordOfWind.append(myWind.getv2iwind().x);
             wordOfWind.append(" Y= ");
@@ -199,6 +200,7 @@ public class SinglePlayer extends GameMode {
                     myCamera.update(view1, players, sequence, myWindow);
                     //////////////////////////////////////////////////wind update
                     myWind.update();
+                    wordOfWind=new StringBuilder();
                     wordOfWind.append("X= ");
                     wordOfWind.append(myWind.getv2iwind().x);
                     wordOfWind.append(" Y= ");
