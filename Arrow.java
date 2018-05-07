@@ -16,7 +16,7 @@ class Arrow extends BasicTransformable implements Drawable
     private Vector2f velocityZero;
     private Time momentZero;
     private Texture mytexture = new Texture();
-    private Sprite mysprite;
+    private Sprite mysprite= new Sprite();
     private Vector2f arrowVelocity;
 	//Arrow() = default;
 	Arrow(Vector2i mouseP, Vector2i mouse, Vector2f poczatek, RenderWindow myWindow, Clock myClock)throws IOException{

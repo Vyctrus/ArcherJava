@@ -23,13 +23,13 @@ public class SoundandMusic {
 	boolean firstTime = true;
 	Time myTime;
 	Time oldTime;
-	SoundBuffer sBuffer1;
-	SoundBuffer sBuffer2;
-	SoundBuffer sBufferP;
-	Sound mySound1;
-	Sound mySound2;
-	Sound painSound;
-	Music notmyMusic;
+	SoundBuffer sBuffer1=new SoundBuffer();
+	SoundBuffer sBuffer2=new SoundBuffer();
+	SoundBuffer sBufferP=new SoundBuffer();
+	Sound mySound1=new Sound();
+	Sound mySound2=new Sound();
+	Sound painSound=new Sound();
+	Music notmyMusic=new Music();
         
 	SoundandMusic(Clock myCLock, DataOfOptions doo)throws IOException
         {
@@ -37,7 +37,7 @@ public class SoundandMusic {
             if (myuseSound) {
                     //if (!musicBuffer.loadFromFile("title.wav"))
                     //	std::cout << "cos poszlo nie tak\n";
-                    
+                    notmyMusic= new Music();
                     notmyMusic.openFromFile(Paths.get("title.wav"));
                     sBuffer1.loadFromFile(Paths.get("sound4.wav"));
                     sBuffer2.loadFromFile(Paths.get("sound2.wav"));

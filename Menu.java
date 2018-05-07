@@ -16,7 +16,7 @@ public abstract class Menu {
 	public abstract void MoveUp();
 	public abstract void MoveDown();
 	public abstract void Display(RenderWindow myWindow);
-	public abstract void Listening(Event event, RenderWindow myWindow, Menu ptrPresent, Menu ptrAlternative,GameMode ptrGameMode, DataOfOptions doo,Camera myCamera);//dzieki dodaniu referencji mozna zmieniac ich wartosci oraz nie trzeba wysylac wskaznika do wskaznika tylko sam wskaznik
+	public abstract Menu Listening(Event event, RenderWindow myWindow, DataOfOptions doo,Camera myCamera) throws IOException;//dzieki dodaniu referencji mozna zmieniac ich wartosci oraz nie trzeba wysylac wskaznika do wskaznika tylko sam wskaznik
 	public int GetPressedItem() { return selectedItemIndex; }
 
 	int selectedItemIndex;

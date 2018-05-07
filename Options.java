@@ -25,10 +25,12 @@ public class Options extends Menu {
         {
             selectedItemIndex = 0;
             dificultyLevelIndex = 1;
+            myFont=new Font();
             myFont.loadFromFile(Paths.get("snap.ttf"));
             
             for (int i = 0; i < NUMBER_OF_OPTIONS_ITEMS; i++)
             {
+                    optionsTexts[i]=new Text();
                     optionsTexts[i].setFont(myFont);
                     optionsTexts[i].setPosition(new Vector2f(myWindow.getSize().x*(float)0.2, myWindow.getSize().y / (NUMBER_OF_OPTIONS_ITEMS + 1)*(i + 1)));
                     optionsTexts[i].setCharacterSize(50);
@@ -71,8 +73,7 @@ public class Options extends Menu {
             optionsTexts[8].setPosition(new Vector2f(myWindow.getSize().x*(float)0.69, myWindow.getSize().y / (NUMBER_OF_OPTIONS_ITEMS + 1)*(2 + 1)));
         }
         @Override
-	public void Listening(Event event, RenderWindow myWindow, Menu ptrPresent, Menu ptrAlternative, GameMode ptrGameMode, DataOfOptions doo, Camera myCamera)
-        {
+	public Menu Listening(Event event, RenderWindow myWindow, DataOfOptions doo, Camera myCamera) throws IOException {
             Menu wskTemporary; //wskaznik pomocniczy do zamiany wartosci Present i Alter ze soba
             switch (event.type)
             {
@@ -140,10 +141,11 @@ public class Options extends Menu {
                             case 3:
                             {
                                     System.out.println("Powrot\n");
-                                    wskTemporary = ptrPresent;//zamiana wartosci wskaznikow, return juz nie jest potrzebny
-                                    ptrPresent = ptrAlternative;
-                                    ptrAlternative = wskTemporary;
-                                    break;
+                                    return new MainMenu(myWindow);
+                                   // wskTemporary = ptrPresent;//zamiana wartosci wskaznikow, return juz nie jest potrzebny
+                                   // ptrPresent = ptrAlternative;
+                                   // ptrAlternative = wskTemporary;
+                                   // break;
                             }
                             }
                             break;
@@ -152,6 +154,7 @@ public class Options extends Menu {
             default:
                     break;
             }
+            return this;
         }
         @Override
 	public void MoveUp()
