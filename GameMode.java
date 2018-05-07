@@ -24,18 +24,18 @@ public abstract class GameMode {
 	View view1;
 	Player player1;
 	Player player2;
-	Clock myClock;
+	Clock myClock=new Clock();
 	Time myTime;
-	ArrayList<Player> players=new ArrayList<Player>();
-	Arrow liveArrow;
+	ArrayList<Player> players;
+	Arrow liveArrow=null;
 	ArrayList<DeadArrow> deadarrows;
 	int sequence = 0;
 	boolean aimLineChecker = false;
 	Vector2f windPosition;
 	Vector2i aimLineBegin, aimLineEnd;
 	boolean letShoot = true;
-        Text endMessage;
-        Text endButton;
+	Text endMessage=new Text();
+	Text endButton=new Text();
 
     protected GameMode() throws IOException {
     }
@@ -54,7 +54,7 @@ public abstract class GameMode {
         
 	public void gameOver(RenderWindow myWindow, Background myBackground, boolean playerOneWins) throws IOException
         {
-            //Font myFont;
+            myFont=new Font();
             myFont.loadFromFile(Paths.get("snap.ttf"));
             myWindow.setView(new View(new Vector2f(960,540), new Vector2f(1920, 1080)));
             //Text endMessage;
@@ -88,8 +88,9 @@ public abstract class GameMode {
                                     return;
                                 }
                             }
+                            event=null;
                     }
-                    if(event.type==Event.Type.CLOSED){};
+                    //if(event.type==Event.Type.CLOSED){};
                     //////////Window Render
                     myWindow.clear();
                     myBackground.displayBackground(myWindow);

@@ -35,8 +35,8 @@ public class Wind extends BasicTransformable implements Drawable{
 	int moveXplus = 1;
 	int moveYplus = 1;
 
-	Texture windtexture;
-	Sprite windsprite;
+	Texture windtexture=new Texture();
+	Sprite windsprite=new Sprite();
         @Override
 	public void draw(RenderTarget target, RenderStates state){
             if (myuseWind) { target.draw(this.windsprite, state); }
@@ -45,6 +45,8 @@ public class Wind extends BasicTransformable implements Drawable{
         ///
 	public Wind( Vector2f position,DataOfOptions doo)throws IOException
         {
+            oldTime=Time.getSeconds(0);
+            windClock=new Clock();
             myRand=new Random();
             myRand.setSeed(System.currentTimeMillis());
             v2iwind = new Vector2i(20, 0);
@@ -167,11 +169,18 @@ public class Wind extends BasicTransformable implements Drawable{
         
         public void update()
         {
+            
             if (myuseWind) {
+                System.out.println("Wszedlem\n");
                     windTime1 = windClock.getElapsedTime();
-                    if (windTime1.asSeconds() >= 2 + oldTime.asSeconds()) {	//co ile ma sie odswiezac wiatr
+                    System.out.println("Wszedlem2\n");
+                    System.out.println(windTime1.asSeconds());
+                    System.out.println("\n");
+                    System.out.println(oldTime.asSeconds());
+                    
+                    if ((int)windTime1.asSeconds() >= 2 +(int) oldTime.asSeconds()) {	//co ile ma sie odswiezac wiatr
                                                                                                                                     ///////////////////////////////
-
+                            System.out.println("Wszedlem3\n");
                             if (1==1/*rand() % 2*/) {// zmien wiatr lub niezmien
                                     if (moveX == 0) {
                                             moveX = 7; //rand() % 5;
@@ -199,7 +208,7 @@ public class Wind extends BasicTransformable implements Drawable{
                                                     moveY--;
                                             }
                                     }
-
+                                    
                                     if (windX >= maxPlusX) {	////////// blok na max'ach
                                             windX = 0;// maxPlusX - 1;
                                     }
@@ -217,7 +226,7 @@ public class Wind extends BasicTransformable implements Drawable{
                             }
 
                             ///////////////////////////////
-                            oldTime = windTime1;
+                            oldTime =windTime1;
                     }
 
                     if (v2iwind.y == 0) {

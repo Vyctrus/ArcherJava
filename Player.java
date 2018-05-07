@@ -19,8 +19,8 @@ public class Player extends BasicTransformable implements Drawable {
         //FloatRect(Vector2f position, Vector2f size)
         //public FloatRect auraOfCollision;//#poprawa na private
         int playerHP;
-	Texture myPlayerTexture;
-	Sprite myPlayerSprite;
+	Texture myPlayerTexture=new Texture();
+	Sprite myPlayerSprite=new Sprite();
         @Override
 	public void draw(RenderTarget target, RenderStates state)
         {

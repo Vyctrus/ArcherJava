@@ -14,14 +14,14 @@ import org.jsfml.window.event.Event;
  * @author Andrzej
  */
 public class Options extends Menu {
-        int selectedItemIndex;
+    int selectedItemIndex;
 	int dificultyLevelIndex;//okresla jaki jest wybrany poziom trudnosci
 	Font myFont;  
-        final int NUMBER_OF_OPTIONS_ITEMS = 9;
+	final int NUMBER_OF_OPTIONS_ITEMS = 9;
 	Text[] optionsTexts=new Text[NUMBER_OF_OPTIONS_ITEMS];
     
     
-	public Options(RenderWindow myWindow)throws IOException
+	public Options(RenderWindow myWindow,DataOfOptions doo)throws IOException
         {
             selectedItemIndex = 0;
             dificultyLevelIndex = 1;
@@ -49,12 +49,17 @@ public class Options extends Menu {
             optionsTexts[3].setString("Powrot");
 
             optionsTexts[4].setColor(Color.WHITE);
-            optionsTexts[4].setString("ON");
+            if(doo.getuseMusic())
+                optionsTexts[4].setString("ON");
+            else
+                optionsTexts[4].setString("OFF");
             optionsTexts[4].setPosition(new Vector2f(myWindow.getSize().x*(float)0.6, myWindow.getSize().y / (NUMBER_OF_OPTIONS_ITEMS + 1)*(0 + 1)));
 
-
             optionsTexts[5].setColor(Color.WHITE);
-            optionsTexts[5].setString("ON");
+            if(doo.getuseWind())
+                optionsTexts[5].setString("ON");
+            else
+                optionsTexts[5].setString("OFF");
             optionsTexts[5].setPosition(new Vector2f(myWindow.getSize().x*(float)0.6, myWindow.getSize().y / (NUMBER_OF_OPTIONS_ITEMS + 1)*(1 + 1)));
             //nowe znaczniki 3 stopniowego poziomu trudnosci
             optionsTexts[6].setColor(Color.WHITE);
@@ -73,8 +78,7 @@ public class Options extends Menu {
             optionsTexts[8].setPosition(new Vector2f(myWindow.getSize().x*(float)0.69, myWindow.getSize().y / (NUMBER_OF_OPTIONS_ITEMS + 1)*(2 + 1)));
         }
         @Override
-	public void Listening(Event event, RenderWindow myWindow, Menu ptrPresent, Menu ptrAlternative, GameMode ptrGameMode, DataOfOptions doo, Camera myCamera)
-        {
+	public Menu Listening(Event event, RenderWindow myWindow, DataOfOptions doo, Camera myCamera) throws IOException {
             Menu wskTemporary; //wskaznik pomocniczy do zamiany wartosci Present i Alter ze soba
             switch (event.type)
             {
@@ -142,10 +146,11 @@ public class Options extends Menu {
                             case 3:
                             {
                                     System.out.println("Powrot\n");
-                                    wskTemporary = ptrPresent;//zamiana wartosci wskaznikow, return juz nie jest potrzebny
-                                    ptrPresent = ptrAlternative;
-                                    ptrAlternative = wskTemporary;
-                                    break;
+                                    return new MainMenu(myWindow);
+                                   // wskTemporary = ptrPresent;//zamiana wartosci wskaznikow, return juz nie jest potrzebny
+                                   // ptrPresent = ptrAlternative;
+                                   // ptrAlternative = wskTemporary;
+                                   // break;
                             }
                             }
                             break;
@@ -154,6 +159,7 @@ public class Options extends Menu {
             default:
                     break;
             }
+            return this;
         }
         @Override
 	public void MoveUp()

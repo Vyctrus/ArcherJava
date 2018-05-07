@@ -26,11 +26,13 @@ public class SinglePlayer extends GameMode {
             endMessageTab[1]=new Text();
             endMessageTab[0].setString("Wygrales !!!");
             endMessageTab[1].setString("Przegrales");
-           // liveArrow.setisDead(true);
+
             player1 = new Player(45, myWindow.getSize().y - 300);
             player2 = new Player(myWindow.getSize().x - 45, myWindow.getSize().y - 300);
             player2.playerFlip();
             windPosition=new Vector2f(player1.getPosition().x + 150,player1.getPosition().y - 150);
+            players=new ArrayList();//#uwaga
+            deadarrows=new ArrayList();//#uwaga
             players.add(player1);
             players.add(player2);
             myWind = new Wind(windPosition, doo);
@@ -50,35 +52,38 @@ public class SinglePlayer extends GameMode {
             hpTexts[2]=new Text();
 
             hpTexts[0].setFont(myFont);
-            hpTexts[0].setPosition(player1.getPosition().x, player1.getPosition().y - 200);///140
+            hpTexts[0].setPosition(player1.getPosition().x, player1.getPosition().y - 250);///140
             hpTexts[0].setCharacterSize(30);
             hpTexts[0].setColor(Color.WHITE);
             hpTexts[0].setString(Integer.toString(player1.getplayerHP()));
 
             hpTexts[1].setFont(myFont);
-            hpTexts[1].setPosition(player2.getPosition().x, player2.getPosition().y - 200);
+            hpTexts[1].setPosition(player2.getPosition().x, player2.getPosition().y - 250);
             hpTexts[1].setCharacterSize(30);
             hpTexts[1].setColor(Color.WHITE);
             hpTexts[1].setString(Integer.toString(player2.getplayerHP()));
 
             hpTexts[2].setFont(myFont);
-            hpTexts[2].setPosition(windPosition.x, windPosition.y);
+            hpTexts[2].setPosition(windPosition.x, windPosition.y-250);
             hpTexts[2].setCharacterSize(30);
             hpTexts[2].setColor(Color.WHITE);
+            wordOfWind=new StringBuilder();
             wordOfWind.append("X= ");
             wordOfWind.append(myWind.getv2iwind().x);
             wordOfWind.append(" Y= ");
             wordOfWind.append(myWind.getv2iwind().y);
             hpTexts[2].setString(wordOfWind.toString());
         }
+            @Override
 	public void Run(RenderWindow myWindow, DataOfOptions doo, Camera myCamera)
-        {   try{
+            { try{
             mySounds.musicPlay();
             Background myBackground=new Background(myWindow);
+            Event event;
             while (myWindow.isOpen())
             {
                     //////////////////////////////////////////////////////////////////////Event handling
-                    Event event;
+                    //Event event;
                     event=myWindow.pollEvent();
                     while (event!=null)
                     {
@@ -112,6 +117,7 @@ public class SinglePlayer extends GameMode {
                             default:
                                     break;
                             }
+                            event=null;
                     }
                     ////////////////////////////////////////////////bot
                     if (sequence == 1 && letShoot == true && !myCamera.getcameraMoveY() && !myCamera.getcameraMoveX()) {
@@ -137,6 +143,7 @@ public class SinglePlayer extends GameMode {
                             }
                     }
                     //////////////////////////////////////////////////////////////////////Window update
+                if(liveArrow!=null){
                     if (!liveArrow.getisDead()) {
                             if (sequence == 0 && liveArrow.isInterecting(player1)) {
                                     player1.decreaseHP();
@@ -182,7 +189,7 @@ public class SinglePlayer extends GameMode {
                                     }
                                     myCamera.start();
                             }
-                    }
+                    }}
                     //tworzenie i rysowanie lini
                     Vector2i pixelPos = Mouse.getPosition(myWindow);
                     Vector2f worldPos = myWindow.mapPixelToCoords(pixelPos);
@@ -193,6 +200,7 @@ public class SinglePlayer extends GameMode {
                     myCamera.update(view1, players, sequence, myWindow);
                     //////////////////////////////////////////////////wind update
                     myWind.update();
+                    wordOfWind=new StringBuilder();
                     wordOfWind.append("X= ");
                     wordOfWind.append(myWind.getv2iwind().x);
                     wordOfWind.append(" Y= ");
@@ -217,5 +225,8 @@ public class SinglePlayer extends GameMode {
             }
             
         }catch(IOException e){}
+        finally {
+                mySounds.musicStop();
+            }
         }
 }

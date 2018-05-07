@@ -20,69 +20,72 @@ public class Background {
     Sprite mySprite;
     ArrayList<Sprite> tabSprite;
     //Vector<Sprite> smiec;
-    
+
     //public
     //Background() = default;
     Background(RenderWindow myWindow) throws IOException
     {
     	mySprite=new Sprite();
-    	tabSprite=new ArrayList<Sprite>();
-	spriteTabIterator = 0;
-	forestTexture=new Texture();
-	forestTexture.loadFromFile(Paths.get("forest.jpg"));
-	skyTexture=new Texture();
-	skyTexture.loadFromFile(Paths.get("sky.jpg"));
-	grassTexture=new Texture();
-	grassTexture.loadFromFile(Paths.get("grass.jpg"));
+    	tabSprite=new ArrayList();//<Sprite>
+        //ArrayList<Sprite> tabSprite;
+		spriteTabIterator = 0;
+		forestTexture=new Texture();
+		forestTexture.loadFromFile(Paths.get("forest.jpg"));
+		skyTexture=new Texture();
+		skyTexture.loadFromFile(Paths.get("sky.jpg"));
+		grassTexture=new Texture();
+		grassTexture.loadFromFile(Paths.get("grass.jpg"));
 
-	for (int i = 0; i < 13; i++, spriteTabIterator++)
-	{
-		tabSprite.add(mySprite);
-		tabSprite.get(spriteTabIterator).setTexture(forestTexture);
-                tabSprite.get(spriteTabIterator).setPosition(-6*myWindow.getSize().x+i*myWindow.getSize().x,0);
-	}
-	for (int i = 0; i < 13; i++, spriteTabIterator++)
-	{
-		tabSprite.add(mySprite);
-		tabSprite.get(spriteTabIterator).setTexture(skyTexture);
-		tabSprite.get(spriteTabIterator).setPosition(-6 * (myWindow.getSize().x) + i *(myWindow.getSize().x), -(myWindow.getSize().y));
-	}
-	for (int i = 0; i < 13; i++, spriteTabIterator++)
-	{
-		tabSprite.add(mySprite);
-		tabSprite.get(spriteTabIterator).setTexture(skyTexture);
-		tabSprite.get(spriteTabIterator).setPosition(-6 *(myWindow.getSize().x) + i *(myWindow.getSize().x), -2 *(myWindow.getSize().y));
-	}
-	for (int i = 0; i < 13; i++, spriteTabIterator++)
-	{
-		tabSprite.add(mySprite);
-		tabSprite.get(spriteTabIterator).setTexture(grassTexture);
-		tabSprite.get(spriteTabIterator).setPosition(-6 * (myWindow.getSize().x) + i * (myWindow.getSize().x),(myWindow.getSize().y));
-	}
+		for (int i = 0; i < 13; i++, spriteTabIterator++)
+		{
+			tabSprite.add(mySprite);
+			tabSprite.set(spriteTabIterator, new Sprite(forestTexture));
+			tabSprite.get(spriteTabIterator).setPosition(-6 * (float)(myWindow.getSize().x) + i * (float)(myWindow.getSize().x), 0);
+		}
+		for (int i = 0; i < 13; i++, spriteTabIterator++)
+		{
+			tabSprite.add(mySprite);
+			tabSprite.set(spriteTabIterator, new Sprite(skyTexture));
+			tabSprite.get(spriteTabIterator).setPosition(-6 * (float)(myWindow.getSize().x) + i * (float)(myWindow.getSize().x), -(float)(myWindow.getSize().y));
+		}
+		for (int i = 0; i < 13; i++, spriteTabIterator++)
+		{
+			tabSprite.add(mySprite);
+			tabSprite.set(spriteTabIterator, new Sprite(skyTexture));
+			tabSprite.get(spriteTabIterator).setPosition(-6 * (float)(myWindow.getSize().x) + i * (float)(myWindow.getSize().x), -2 * (float)(myWindow.getSize().y));
+		}
+		for (int i = 0; i < 13; i++, spriteTabIterator++)
+		{
+			tabSprite.add(mySprite);
+			tabSprite.set(spriteTabIterator, new Sprite(grassTexture));
+			tabSprite.get(spriteTabIterator).setPosition(-6 * (float)(myWindow.getSize().x) + i * (float)(myWindow.getSize().x), (float)(myWindow.getSize().y));
+		}
     }
     //~Background() = default;
     void displayGraphics(RenderWindow myWindow, ArrayList<Player> players, Arrow liveArrow, ArrayList<DeadArrow> deadarrows)
     {
-	for (int i = 0; i < 52; i++) {
-		myWindow.draw(tabSprite.get(i));
-	}
-	for (int i = 0; i<players.size(); i++)
-	{
-		myWindow.draw(players.get(i));
-	}
-	if (!liveArrow.getisDead()) {
-		myWindow.draw(liveArrow);
-	}
-	for (int i = 0; i < deadarrows.size(); i++) {
-		myWindow.draw(deadarrows.get(i));
-	}
+		for (int i = 0; i < 52; i++) {
+			myWindow.draw(tabSprite.get(i));
+		}
+		for (int i = 0; i<players.size(); i++)
+		{
+			myWindow.draw(players.get(i));
+		}
+		if(liveArrow!=null){
+			if (!liveArrow.getisDead()) {
+				myWindow.draw(liveArrow);
+			}
+		}
+
+		for (int i = 0; i < deadarrows.size(); i++) {
+			myWindow.draw(deadarrows.get(i));
+		}
     }
     void displayBackground(RenderWindow myWindow)
     {
-	for (int i = 0; i < 52; i++)
-	{
-		myWindow.draw(tabSprite.get(i));
-	}
+		for (int i = 0; i < 52; i++)//52
+		{
+			myWindow.draw(tabSprite.get(i));
+		}
     }
-    
 }
