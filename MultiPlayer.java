@@ -13,74 +13,25 @@ import java.nio.file.Paths;
 import static org.jsfml.graphics.PrimitiveType.LINES;
 import static org.jsfml.graphics.PrimitiveType.LINE_STRIP;
 import org.jsfml.window.event.Event;
-/**
+ /**
  *
  * @author Andrzej
  */
 public class MultiPlayer extends GameMode {
     public MultiPlayer (RenderWindow myWindow,DataOfOptions doo,Camera myCamera)throws IOException
     {
-		endMessageTab[0]=new Text();
-		endMessageTab[1]=new Text();
-	endMessageTab[0].setString("Wygral gracz pierwszy");
-	endMessageTab[1].setString("Wygral gracz drugi");
-
-	myTime = myClock.getElapsedTime();
-//	liveArrow.setisDead(true);
-	player1 = new Player(45, myWindow.getSize().y - 300);
-	player2 = new Player(myWindow.getSize().x - 45, myWindow.getSize().y - 300);
-	player2.playerFlip();
-	windPosition=new Vector2f(player1.getPosition().x+150,player1.getPosition().y - 150);
-	players=new ArrayList();//#uwaga
-		 deadarrows=new ArrayList();//#uwaga
-	players.add(player1);
-	players.add(player2);
-	myWind=new Wind(windPosition, doo);
-	mySounds = new SoundandMusic(myClock,doo);
-	view1 = new View(new FloatRect(new Vector2f(-100, 480), new Vector2f(1000, 1000)));
-	view1.setCenter(players.get(sequence).getPosition());
-	myWindow.setView(view1);
-
-	myFont=new Font();
-	myFont.loadFromFile(Paths.get("snap.ttf"));
-
-	hpTexts[0]=new Text();
-	hpTexts[1]=new Text();
-	hpTexts[2]=new Text();
-
-	hpTexts[0].setFont(myFont);
-	hpTexts[0].setPosition(player1.getPosition().x,player1.getPosition().y-250);
-	hpTexts[0].setCharacterSize(30);
-	
-	hpTexts[0].setColor(Color.WHITE);
-	hpTexts[0].setString(Integer.toString(player1.getplayerHP()));
-
-	hpTexts[1].setFont(myFont);
-	hpTexts[1].setPosition(player2.getPosition().x, player2.getPosition().y - 250);
-	hpTexts[1].setCharacterSize(30);
-	hpTexts[1].setColor(Color.WHITE);
-	hpTexts[1].setString(Integer.toString(player2.getplayerHP()));
-
-	hpTexts[2].setFont(myFont);
-	hpTexts[2].setPosition(windPosition.x,windPosition.y-250);
-	hpTexts[2].setCharacterSize(30);
-	hpTexts[2].setColor(Color.WHITE);
-        wordOfWind=new StringBuilder();
-        wordOfWind.append("X= ");
-        wordOfWind.append(myWind.getv2iwind().x);
-        wordOfWind.append(" Y= ");
-        wordOfWind.append(myWind.getv2iwind().y);
-        hpTexts[2].setString(wordOfWind.toString());
-
+		super(myWindow,doo,myCamera);
+		endMessageTab[0].setString("Wygral gracz pierwszy");
+		endMessageTab[1].setString("Wygral gracz drugi");
     }
 
     @Override
     public void Run(RenderWindow myWindow,DataOfOptions doo,Camera myCamera)
     {
         Event event;
-	mySounds.musicPlay();
+		mySounds.musicPlay();
         try{
-	Background myBackground=new Background(myWindow);
+			Background myBackground=new Background(myWindow);
         
         //Background myBackground(myWindow);
 	while (myWindow.isOpen())

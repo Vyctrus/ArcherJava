@@ -49,7 +49,7 @@ public class MainMenu extends Menu {
         {
             GameMode ptrGameMode;
             try{
-            Menu wskTemporary;//wskaznik pomocniczy do zamiany wartosci Present i Alter ze soba
+            Menu wskTemporary;
             switch (event.type)
             {
             case CLOSED:
@@ -79,26 +79,21 @@ public class MainMenu extends Menu {
                             }
                             case 1:
                             {
-                                    System.out.println("Dwoch graczy\n");                                   
-                                    ptrGameMode = new MultiPlayer(myWindow,doo,myCamera);
-                                    ptrGameMode.Run(myWindow,doo,myCamera);
-                                    //delete ptrGameMode;
-                                    ptrGameMode=null;
-                                    myWindow.setView(new View(new Vector2f(960, 540),new Vector2f(1920, 1080)));
-                                    break;
+                                System.out.println("Dwoch graczy\n");
+                                ptrGameMode = new MultiPlayer(myWindow,doo,myCamera);
+                                ptrGameMode.Run(myWindow,doo,myCamera);
+                                ptrGameMode=null;
+                                myWindow.setView(new View(new Vector2f(960, 540),new Vector2f(1920, 1080)));
+                                break;
                             }
                             case 2:
                             {
-                                    System.out.println("Ustawienia\n");
-                                    return new Options(myWindow,doo);
-                                    //wskTemporary = ptrPresent;//zamiana wartosci wskaznikow, return juz nie jest potrzebny
-                                   // ptrPresent = ptrAlternative;
-                                   //ptrAlternative = wskTemporary;
-                                  //  break;
+                                System.out.println("Ustawienia\n");
+                                return new Options(myWindow,doo);
                             }
                             case 3:
-                                    myWindow.close();
-                                    break;
+                                myWindow.close();
+                                break;
                             }
                             break;
                     }
